@@ -9,8 +9,12 @@ cd /opt
 sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-10.3.0.82913.zip
 sudo yum install unzip -y
 sudo unzip /opt/sonarqube-10.3.0.82913.zip
-
+mv sonarqube-10.3.0.82913 /opt/sonarqube
 #change ownership to the user and switch to linux binaries to start the  service
-chown -R <sonar_user>:<sonar_user_group> /opt/sonarqube-10.3.0.82913
-cd /opt/sonarqube-10.3.0.82913/bin/linux-x86-64
+chmod +x sonarqube
+useradd sonaradmin
+chown -R <sonar_user>:<sonar_user_group> /opt/sonarqube
+su - sonaradmin
+cd /opt/sonarqube/bin/linux-x86-64
 ./sonar.sh start
+./sonar.sh status
